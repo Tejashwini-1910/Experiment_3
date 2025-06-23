@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Register - ShopEasy</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <style>
+    .error { color: red; font-size: 0.875rem; }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+      <a class="navbar-brand" href="#">ShopEasy</a>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="index.html">Catalog</a></li>
+          <li class="nav-item"><a class="nav-link" href="cart.html">Cart</a></li>
+          <li class="nav-item"><a class="nav-link" href="login.html">Login</a></li>
+          <li class="nav-item"><a class="nav-link active" href="register.html">Register</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Registration Form -->
+  <div class="container my-5">
+    <h2 class="text-center mb-4">Create an Account</h2>
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <form id="registerForm" novalidate>
+          <div class="mb-3">
+            <label for="name" class="form-label">Full Name</label>
+            <input type="text" class="form-control" id="name" />
+            <div id="nameError" class="error"></div>
+          </div>
+          <div class="mb-3">
+            <label for="email" class="form-label">Email address</label>
+            <input type="email" class="form-control" id="email" />
+            <div id="emailError" class="error"></div>
+          </div>
+          <div class="mb-3">
+            <label for="password" class="form-label">Create Password</label>
+            <input type="password" class="form-control" id="password" />
+            <div id="passwordError" class="error"></div>
+          </div>
+          <div class="mb-3">
+            <label for="confirmPassword" class="form-label">Confirm Password</label>
+            <input type="password" class="form-control" id="confirmPassword" />
+            <div id="confirmPasswordError" class="error"></div>
+          </div>
+          <button type="submit" class="btn btn-primary w-100">Register</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-dark text-white text-center py-3">
+    &copy; 2025 ShopEasy. All rights reserved.
+  </footer>
+
+  <script>
+    document.getElementById('registerForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      // Get form values
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value.trim();
+      const confirmPassword = document.getElementById('confirmPassword').value.trim();
+
+      let isValid = true;
+
+      // Clear previous errors
+      document.querySelectorAll('.error').forEach(e => e.innerText = '');
+
+      // Validate Name
+      if (name === '') {
+        document.getElementById('nameError').innerText = 'Full name is required.';
+        isValid = false;
+      }
+
+      // Validate Email
+      if (email === '') {
+        document.getElementById('emailError').innerText = 'Email is required.';
+        isValid = false;
+      } else if (!/^\S+@\S+\.\S+$/.test(email)) {
+        document.getElementById('emailError').innerText = 'Invalid email format.';
+        isValid = false;
+      }
+
+      // Validate Password
+      if (password === '') {
+        document.getElementById('passwordError').innerText = 'Password is required.';
+        isValid = false;
+      } else if (password.length < 6) {
+        document.getElementById('passwordError').innerText = 'Password must be at least 6 characters.';
+        isValid = false;
+      }
+
+      // Confirm Password
+      if (confirmPassword !== password) {
+        document.getElementById('confirmPasswordError').innerText = 'Passwords do not match.';
+        isValid = false;
+      }
+
+      if (isValid) {
+        alert('Registration successful!');
+        // You can redirect or reset the form here if needed
+        this.reset();
+      }
+    });
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
